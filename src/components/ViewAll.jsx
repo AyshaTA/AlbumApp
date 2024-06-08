@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const ViewAll = () => {
-    const [data, setdata] = useState(
-        [
-            {"userId": 1,"id": 1, "title": "quidem molestiae enim" },
-            {"userId": 1,"id": 2,"title": "sunt qui excepturi placeat culpa" },
-            {"userId": 1,"id": 3,"title": "omnis laborum odio"},
-            {"userId": 1,"id": 4,"title": "non esse culpa molestiae omnis sed optio"}
-
-        ]
-
-    )
+    
+    const [data, setdata] = useState([])
+    const fetchData=()=>{
+        axios.get("https://jsonplaceholder.typicode.com/albums").then(
+            (Response)=>{
+                setdata(Response.data)
+            }
+        ).catch().finally()
+    }
+    useEffect(()=>{fetchData()},[])
     return (
 
         <div>
